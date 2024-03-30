@@ -1,0 +1,222 @@
+
+- Vector de vientos y vorticidad
+
+
+c
+set display color white
+set clab masked
+set mpdset hires
+c
+set grads off
+set t 16
+set lon -80 -60
+set lat -25 -5
+set lev 500
+set gxout shaded
+color -10 10 2
+d hcurl(u,v)*1e5
+set gxout barb
+d skip(u,5,5);v
+cbarn
+draw title Analisis H+4 (10/02/2021-15UTC)
+
+
+
+
+- Espesor 1000 a 500 con vientos
+
+c
+set display color white
+c
+run jaecol.gs
+set lat -25 -5
+set lon -80 -60
+set t 16
+set mpdset hires
+set poli on
+set clopts -1 -1. 0.12
+set ylopts 1 5 0.14
+set xlopts 1 5 0.14
+set map 79 1 6
+set xlint 5
+set ylint 5
+define z5=z(lev=500)
+define z1=z(lev=1000)
+define espesor=z5-z1
+set grads off
+set gxout shaded
+set clevs 5500 5520 5530 5540 5550 5560 5570 5580 5600 5620 5630 5640 5650 5660 
+set rbcols 59 58 57 49 47 45 43 42 41 21 22 23 24 25 26 27 28 29
+set csmooth on
+set cint 10
+d espesor/10
+set lev 500
+set gxout barb
+d skip(u,5,5);v
+cbarn
+draw title Analisis H+4 (10/02/2021-15UTC)
+
+
+
+
+
+
+
+
+
+
+
+DIVERGENCIA Y CORRIENTE EN CHORRO
+
+c
+set display color white
+set mpdset hires
+c
+set grads off
+set t 16
+set lon -80 -60
+set lat -25 -5
+set lev 250
+set gxout shaded
+set cmin 1
+d d*100000/5
+cbarn
+set gxout barb
+d skip(u,6,6);v
+set lev 200
+set gxout contour
+set ccolor 11
+set cmin 25
+d mag (u,v)
+draw title Analisis H+4 (10/02/2021-15UTC) 
+
+
+
+
+
+
+
+
+Jet stream y barbas a 200hpa (
+
+c
+set display color white
+set clab masked
+set mpdset hires
+c
+set grads off
+set t 16
+set lon -85 -55
+set lat -35 -5
+set lev 200
+set gxout shaded
+set cint 5
+set cmin 25
+set ccolor 10 50 5 -kind white->white->ivory->lightgreen->mediumseagreen->powderblue->darkblue->darkviolet
+d mag(u,v)
+set gxout barb
+d skip(u,7,7);v
+set gxout contour
+set cint 25
+set ccolor 11
+d z/10
+cbarn
+draw title Analisis H+4 (10/02/2021-15UTC)
+
+
+
+
+
+
+
+
+PRECIPITACION E INDICES (primero*0.8, segundo tal cual, tercero*0.5)
+
+
+c
+set display color white
+set clab masked
+set mpdset hires
+c
+set grads off
+set xlint 5
+set lon -75 -60
+set lat -25 -5
+set gxout shaded
+set cmin 20
+set ccolor 10 80 5 -kind white->white->ivory->lightgreen->mediumseagreen->powderblue->darkblue->darkviolet
+d precip*0.5
+cbarn
+draw title Diario Acumulado - 11/02/2021 
+
+
+
+
+
+
+
+
+Corte vertical (Velocidad vertical) (t6 - t13)
+
+
+set display color white
+set mpdset hires
+c
+set grads off
+set lon -86 -60
+set lat -13
+set lev 1000 200
+set t 13
+set gxout shaded
+color 60 95 5 -kind white->white->ivory->lightgreen->mediumseagreen->green->darkgreen
+d r
+set gxout contour
+set ccolor 1
+set clab forced
+set cint 0.4
+set cmax -0.2
+d w
+cbarn
+draw title Perfil vertical H+4 (10/02/2021-15UTC)
+
+
+
+
+
+
+
+
+
+- Corte Vertical  (DESDE t7 a t14)
+
+
+c
+set display color white
+set mpdset hires
+c
+set grads off
+set lon -86 -49
+set lat -13
+set lev 1000 200
+set t 14
+set gxout shaded
+color 60 95 5 -kind white->white->ivory->lightgreen->mediumseagreen->green->darkgreen
+d r
+set gxout contour
+set clab forced
+set ccolor 2
+set cmin 1 
+set cmax 3
+d d*100000/5
+set gxout contour
+set clab forced
+set ccolor 4
+set cmin -3 
+set cmax -1
+d d*100000/5
+cbarn
+draw title Perfil vertical H+4 (10/02/2021-15UTC)
+
+
+
+
